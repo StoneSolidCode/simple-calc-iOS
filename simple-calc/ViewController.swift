@@ -14,7 +14,8 @@ class ViewController: UIViewController {
     var specialOp = ""
     var input: [String] = []
     var answer = 0.0
-    var specOpCount = 1
+    var answerDisplayed = true
+    var correctIndex = 0
     @IBOutlet weak var calcDisplay: UILabel!
     
     
@@ -26,7 +27,13 @@ class ViewController: UIViewController {
     
     @IBAction func btnPressed(_ sender: UIButton) {
         input.append((sender.titleLabel?.text)!)
+        if answerDisplayed {
+            calcDisplay.text = (sender.titleLabel?.text)!
+        } else {
+            calcDisplay.text = ((calcDisplay.text ?? "") + (sender.titleLabel?.text)!)
+        }
         print(input)
+        answerDisplayed = false
     }
 
     @IBAction func btnOperationPressed(_ sender: UIButton) {
@@ -35,8 +42,20 @@ class ViewController: UIViewController {
             oneNum.append(num)
         }
         input = [oneNum,(sender.titleLabel?.text)!]
+        calcDisplay.text = ((calcDisplay.text ?? "") + " " + (sender.titleLabel?.text)! + " ")
+        specialOp = (sender.titleLabel?.text)!
     }
 
+    @IBAction func btnSpecOpPressed(_ sender: UIButton) {
+        var oneNum = ""
+        for i in correctIndex...(input.count - 1) {
+            oneNum.append(input[i])
+        }
+        input[correctIndex] = oneNum
+        correctIndex += 1
+        input.append((sender.titleLabel?.text)!)
+        calcDisplay.text = ((calcDisplay.text ?? "") + " " + (sender.titleLabel?.text)! + " ")
+    }
     
     @IBAction func btnPlusPressed(_ sender: Any) {
     }
@@ -54,16 +73,25 @@ class ViewController: UIViewController {
             for i in 2...(input.count - 1) {
                 oneNum.append(input[i])
             }
+            print(oneNum)
             input[2] = oneNum
-            answer = calculate(input)
+            var calc: [String] = []
+            for i in 0...2 {
+                calc.append(input[i])
+            }
+            answer = calculate(calc)
+            print(answer)
             if answer - round(answer) == 0.0 {
                 calcDisplay.text = String(Int(round(answer)))
             } else {
                 calcDisplay.text = String(answer)
             }
+        } else {
+            input.append(specialOp)
         }
         input = []
-        specOpCount = 1
+        correctIndex = 0
+        answerDisplayed = true
     }
     @IBAction func btnFactPressed(_ sender: Any) {
 //        var index = 0
@@ -81,6 +109,7 @@ class ViewController: UIViewController {
     
     @IBAction func cheatClear(_ sender: Any) {
         input = []
+        calcDisplay.text = "0"
     }
     
     public func calculate(_ args: [String]) -> Double {
