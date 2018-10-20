@@ -54,7 +54,6 @@
                                 <state key="normal" title="+"/>
                                 <connections>
                                     <action selector="btnOperationPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="l2X-15-5EA"/>
-                                    <action selector="btnPlusPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aKW-4S-xi8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYS-HI-JM4">
@@ -110,7 +109,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="-"/>
                                 <connections>
-                                    <action selector="btnMinusPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X41-8m-xYU"/>
                                     <action selector="btnOperationPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QUX-Jy-eHW"/>
                                 </connections>
                             </button>
@@ -119,7 +117,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="/"/>
                                 <connections>
-                                    <action selector="btnDividePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oYv-39-udS"/>
                                     <action selector="btnOperationPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qaC-f8-EJX"/>
                                 </connections>
                             </button>
@@ -128,7 +125,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="*"/>
                                 <connections>
-                                    <action selector="btnMultPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6ew-bq-Jsa"/>
                                     <action selector="btnOperationPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bgb-3k-W7g"/>
                                 </connections>
                             </button>

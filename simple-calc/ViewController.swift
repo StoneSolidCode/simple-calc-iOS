@@ -18,8 +18,6 @@ class ViewController: UIViewController {
     var correctIndex = 0
     @IBOutlet weak var calcDisplay: UILabel!
     
-    
-   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -43,7 +41,6 @@ class ViewController: UIViewController {
         }
         input = [oneNum,(sender.titleLabel?.text)!]
         calcDisplay.text = ((calcDisplay.text ?? "") + " " + (sender.titleLabel?.text)! + " ")
-        specialOp = (sender.titleLabel?.text)!
     }
 
     @IBAction func btnSpecOpPressed(_ sender: UIButton) {
@@ -52,59 +49,45 @@ class ViewController: UIViewController {
             oneNum.append(input[i])
         }
         input[correctIndex] = oneNum
+        specialOp = (sender.titleLabel?.text)!
         correctIndex += 1
-        input.append((sender.titleLabel?.text)!)
         calcDisplay.text = ((calcDisplay.text ?? "") + " " + (sender.titleLabel?.text)! + " ")
     }
     
-    @IBAction func btnPlusPressed(_ sender: Any) {
-    }
-    @IBAction func btnMinusPressed(_ sender: Any) {
-    }
-    @IBAction func btnDividePressed(_ sender: Any) {
-    }
-    
-    @IBAction func btnMultPressed(_ sender: Any) {
-    }
     @IBAction func btnEqualsPressed(_ sender: Any) {
+        if specialOp != "" {
+            input.append(specialOp)
+        }
         let l = input.last
+        print(input)
         if l != "count" && l != "avg" && l != "fact" {
             var oneNum = ""
             for i in 2...(input.count - 1) {
                 oneNum.append(input[i])
             }
-            print(oneNum)
             input[2] = oneNum
             var calc: [String] = []
             for i in 0...2 {
                 calc.append(input[i])
             }
             answer = calculate(calc)
-            print(answer)
             if answer - round(answer) == 0.0 {
                 calcDisplay.text = String(Int(round(answer)))
             } else {
                 calcDisplay.text = String(answer)
             }
         } else {
-            input.append(specialOp)
+            answer = calculate(input)
+            if answer - round(answer) == 0.0 {
+                calcDisplay.text = String(Int(round(answer)))
+            } else {
+                calcDisplay.text = String(answer)
+            }
         }
         input = []
         correctIndex = 0
         answerDisplayed = true
-    }
-    @IBAction func btnFactPressed(_ sender: Any) {
-//        var index = 0
-//        for item in input {
-//            if item == (sender.titleLabel?.text)! {
-//                index =
-//            }
-//        }
-    }
-    
-    @IBAction func btnCountPressed(_ sender: Any) {
-    }
-    @IBAction func btnAvgPressed(_ sender: Any) {
+        specialOp = ""
     }
     
     @IBAction func cheatClear(_ sender: Any) {
@@ -124,7 +107,7 @@ class ViewController: UIViewController {
             } else if args[1] == "-" {
                 return Double(args[0])! - Double(args[2])!
             } else if args[1] == "%" {
-                return Double(args[0])! - Double(args[2])! * (Double(args[0])! / Double(args[2])!)
+                return Double(Int(args[0])! % Int(args[2])!)
             }
         } else if l == "count" {
             return Double(args.count - 1)
